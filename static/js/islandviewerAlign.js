@@ -1,42 +1,39 @@
-function IslandviewerAlign(islandviewerObj) {
-    
-    this.ext_id = islandviewerObj.ext_id;
-    
-    if('undefined' !== typeof islandviewerObj.plotid) {
-            
-            if(islandviewerObj.plotid == 'circularchart') {
-                    this.circle_id = islandviewerObj.plotid;
-             }
+function IslandviewerAlign() {
+this.islandviewerAlignData {};
+    IslandviewerAlign.prototype.add_islandviewerObj = function(islandviewerObj){    
+        
+    ext_id = islandviewerObj.ext_id;
+    this.islandviewerAlignData[ext_id] = {
+    ivObj = islandviewerObj
+	}]  
+   
+    if('undefined' !== typeof islandviewerObj.circularplot) {
+ 
+                  this.islandviewerAlignData[ext_id][circle_id] = islandviewerObj.circularplot.plotid;
+   
+   }
+   
+   if('undefined' !== typeof islandviewerObj.linearplot) {
              
-            if(islandviewerObj.plotid == 'circularchartlinear') {
-                    this.linear_id = islandviewerObj.plotid;
-             }
+            this.islandviewerAlignData[ext_id][linear_id] = islandviewerObj.linearplot.plotid;
+             }         
+   }
                
     console.log("Called islandviewerObj " + this.ext_id);
+     	 
 }
 
-
-IslandviewerAlign.prototype.addCircularPlot = function(layout) {
-    
-    return Islandviewer.addCircularPlot(layout)
-    
-}
-
-IslandviewerAlign.prototype.addLinearPlot = function(layout) {
+for each (ext_id in islandviewerAlignData) {
   
- return Islandviewer.addCircularPlot(layout)
-
+   if('undefined' !== typeof islandviewerAlignData[ext_id][circle_id]) {
+    plotid = islandviewerAlignData[ext_id][circle_id];
+   }
+   else('undefined' !== typeof islandviewerAlignData[ext_id][linear_id]) {
+    plotid = islandviewerAlignData[ext_id][linear_id];
+   }
+   
 }
 
-IslandviewerAlign.prototype.onclick = function(trackname, d, plotid, skip_half_range) {
-//    console.log("Got a callback " + d);
-//    console.log(trackname);
-//    console.log(d);
-//    console.log(plotid);
-
-  islandviewer.onclick(trackname, d, plotid, skip_half_range)
-
-}
 
 IslandviewerAlign.prototype.ondblclick = function(plotid, bp) {
 
