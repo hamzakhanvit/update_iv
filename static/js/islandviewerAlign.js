@@ -23,23 +23,17 @@ this.islandviewerAlignData {};
      	 
 }
 
-for each (ext_id in islandviewerAlignData) {
-  
-   if('undefined' !== typeof islandviewerAlignData[ext_id][circle_id]) {
-    plotid = islandviewerAlignData[ext_id][circle_id];
-   }
-   else('undefined' !== typeof islandviewerAlignData[ext_id][linear_id]) {
-    plotid = islandviewerAlignData[ext_id][linear_id];
-   }
-   
-}
-
 
 IslandviewerAlign.prototype.ondblclick = function(plotid, bp) {
 
-  islandviewer.ondblclick(plotid, bp)
-    
+for each (ext_id in islandviewerAlignData) {
+  
+   if('undefined' !== typeof islandviewerAlignData[ext_id][circle_id] && plotid == islandviewerAlignData[ext_id][circle_id]) {
+
+        islandviewer.ondblclick(plotid, bp)
+    }
 }
+
 
 IslandviewerAlign.prototype.mouseover = function(trackname, d, plotid) {
 //    console.log("Got a callback " + d);
@@ -47,9 +41,16 @@ IslandviewerAlign.prototype.mouseover = function(trackname, d, plotid) {
 //    console.log(d);
 //    console.log(plotid);
 
-  islandviewer.mouseover(trackname, d, plotid)
+for each (ext_id in islandviewerAlignData) {
+  
+   if('undefined' !== typeof islandviewerAlignData[ext_id][circle_id] && plotid == islandviewerAlignData[ext_id][circle_id]) {
+
+        islandviewer.mouseover(trackname, d, plotid)
     
+    }
+
 }
+
 
 IslandviewerAlign.prototype.mouseout = function(trackname, d, plotid) {
 //    console.log("mouseout callback " + d);
@@ -57,16 +58,31 @@ IslandviewerAlign.prototype.mouseout = function(trackname, d, plotid) {
 //    console.log(d);
 //    console.log(plotid);
 
-  islandviewer.mouseout(trackname, d, plotid)
-    
+for each (ext_id in islandviewerAlignData) {
+  
+   if('undefined' !== typeof islandviewerAlignData[ext_id][circle_id] && plotid == islandviewerAlignData[ext_id][circle_id]) {
+
+      islandviewer.mouseout(trackname, d, plotid)
+    }
 }
 
 IslandviewerAlign.prototype.update = function(startBP, endBP, params) {
 
+for each (ext_id in islandviewerAlignData) {
+  
+   if('undefined' !== typeof islandviewerAlignData[ext_id][circle_id] && plotid == islandviewerAlignData[ext_id][circle_id]) {
+
     islandviewer.update(startBP, endBP, params)
+    }
 }
 
 IslandviewerAlign.prototype.update_finished = function(startBP, endBP, params) {
-    islandviewer.update_finished(startBP, endBP, params)
+
+for each (ext_id in islandviewerAlignData) {
+  
+   if('undefined' !== typeof islandviewerAlignData[ext_id][circle_id] && plotid == islandviewerAlignData[ext_id][circle_id]) {
+    
+      islandviewer.update_finished(startBP, endBP, params)
+    }
 }
 
