@@ -3,8 +3,6 @@ var islandviewerAlignData={};
 
 function IslandviewerAlign() {
 
-   
-    
     this.add_islandviewerObj = function(islandviewerObj){    
     ext_id = islandviewerObj.ext_id;
     islandviewerAlignData[ext_id] = {};
@@ -66,8 +64,7 @@ IslandviewerAlign.prototype.onclick = function(trackname, d, plotid,skip_half_ra
 
     if('undefined' !== typeof islandviewerAlignData[ext_id].circle_id && plotid == islandviewerAlignData[ext_id].circle_id) {
 
-        islandviewerObj.onclick = function(trackname, d, plotid, skip_half_range) {
-    }
+        islandviewerObj.onclick(trackname, d, plotid, skip_half_range) 
 
         }
 }
