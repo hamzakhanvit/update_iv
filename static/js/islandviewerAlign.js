@@ -62,7 +62,7 @@ for (ext_id in islandviewerAlignData) {
 }
 }
 
-IslandviewerAlign.prototype.onclick = function(trackname, d, plotid) {
+IslandviewerAlign.prototype.onclick = function(trackname, d, plotid,skip_half_range) {
 
     if('undefined' !== typeof islandviewerAlignData[ext_id].circle_id && plotid == islandviewerAlignData[ext_id].circle_id) {
 
