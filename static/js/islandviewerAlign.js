@@ -4,7 +4,17 @@ var islandviewerAlignData={};
 function IslandviewerAlign() {
 
     this.add_islandviewerObj = function(islandviewerObj){    
-    ext_id = islandviewerObj.ext_id;
+    if('undefined' !== typeof islandviewerObj.ext_id) {
+    
+        ext_id = islandviewerObj.ext_id;
+    }
+    if('undefined' !== typeof islandviewerObj.second_extid) {
+    
+        ext_id = islandviewerObj.second_extid;
+    
+    }
+    
+    console.log(islandviewerObj);
     islandviewerAlignData[ext_id] = {};
     console.log("The ext_id is " + ext_id); 
     //var plotid = islandviewerObj.circularplot.layout.plotid;
@@ -120,8 +130,8 @@ IslandviewerAlign.prototype.remove = function(Obj_to_remove) {
 
 remove_id = Obj_to_remove.ext_id;
 
-delete (islandviewerAlignData[remove_id])
+//delete (islandviewerAlignData[remove_id])
 
-
+delete(Obj_to_remove)
 }
 
