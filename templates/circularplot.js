@@ -9,9 +9,9 @@ var {{ varName|default:"circular" }}data = [
 	  showLabels: true,
 	  showTooltip: true,
 	  {% if ext_id %}ext_id: '{{ext_id}}',
-	  linear_mouseclick: '{{ varName|default:'' }}islandviewerAlignObj',{% endif %}
-	  linear_mouseover: '{{ varName|default:'' }}islandviewerAlignObj',
-	  linear_mouseout: '{{ varName|default:'' }}islandviewerAlignObj',
+	  linear_mouseclick: 'islandviewerAlignObj',{% endif %}
+	  linear_mouseover: 'islandviewerAlignObj',
+	  linear_mouseout: 'islandviewerAlignObj',
 	  items: [
 		{% for gene in genes %}
 		  {id: {{ gene.id }}, start: {{ gene.start }}, end: {{ gene.end }}, strand: {{ gene.strand }}, name: "{{ gene.locus }}", accnum: "{{ gene.name }}" },
@@ -24,13 +24,13 @@ var {{ varName|default:"circular" }}data = [
 	  inner_radius: {{ ip_inner_radius|default:50 }},
 	  outer_radius: {{ ip_outer_radius|default:100 }},
 	  min_slice: true,
-	  mouseover_callback: '{{ varName|default:'' }}islandviewerAlignObj',
-	  mouseout_callback: '{{ varName|default:'' }}islandviewerAlignObj',
-	  mouseclick: '{{ varName|default:'' }}islandviewerAlignObj',
+	  mouseover_callback: 'islandviewerAlignObj',
+	  mouseout_callback: 'islandviewerAlignObj',
+	  mouseclick: 'islandviewerAlignObj',
 	  {% if ext_id %}ext_id: '{{ext_id}}',
-	  linear_mouseclick: '{{ varName|default:'' }}islandviewerAlignObj',{% endif %}
-	  linear_mouseover: '{{ varName|default:'' }}islandviewerAlignObj',
-	  linear_mouseout: '{{ varName|default:'' }}islandviewerAlignObj',
+	  linear_mouseclick: 'islandviewerAlignObj',{% endif %}
+	  linear_mouseover: 'islandviewerAlignObj',
+	  linear_mouseout: 'islandviewerAlignObj',
 	  items: [
 	    {% for gi in gis %}
 	       {% if gi.prediction_method == "Islandpick" %}{id: {{ gi.gi }}, start: {{ gi.start }}, end: {{ gi.end }}, name: "{{ gi.gi }}" }{% if not forloop.last %},{% endif %}{% endif %}
@@ -42,13 +42,13 @@ var {{ varName|default:"circular" }}data = [
 	  trackType: "track",
 	  inner_radius: {{ sigi_inner_radius|default:100 }},
 	  outer_radius: {{ sigi_outer_radius|default:150 }},
-	  mouseover_callback: '{{ varName|default:'' }}islandviewerAlignObj',
-	  mouseout_callback: '{{ varName|default:'' }}islandviewerAlignObj',
-	  mouseclick: '{{ varName|default:'' }}islandviewerAlignObj',
+	  mouseover_callback: 'islandviewerAlignObj',
+	  mouseout_callback: 'islandviewerAlignObj',
+	  mouseclick: 'islandviewerAlignObj',
 	  {% if ext_id %}ext_id: '{{ext_id}}',
-	  linear_mouseclick: '{{ varName|default:'' }}islandviewerAlignObj',{% endif %}
-	  linear_mouseover: '{{ varName|default:'' }}islandviewerAlignObj',
-	  linear_mouseout: '{{ varName|default:'' }}islandviewerAlignObj',
+	  linear_mouseclick: 'islandviewerAlignObj',{% endif %}
+	  linear_mouseover: 'islandviewerAlignObj',
+	  linear_mouseout: 'islandviewerAlignObj',
 	  items: [
 	    {% for gi in gis %}
 	       {% if gi.prediction_method == "Sigi" %}
@@ -63,13 +63,13 @@ var {{ varName|default:"circular" }}data = [
 	  inner_radius: {{ dimob_inner_radius|default:150 }},
 	  outer_radius: {{ dimob_outer_radius|default:200 }},
 	  min_slice: true,
-	  mouseover_callback: '{{ varName|default:'' }}islandviewerAlignObj',
-	  mouseout_callback: '{{ varName|default:'' }}islandviewerAlignObj',
-	  mouseclick: '{{ varName|default:'' }}islandviewerAlignObj',
+	  mouseover_callback: 'islandviewerAlignObj',
+	  mouseout_callback: 'islandviewerAlignObj',
+	  mouseclick: 'islandviewerAlignObj',
 	  {% if ext_id %}ext_id: '{{ext_id}}',
-	  linear_mouseclick: '{{ varName|default:'' }}islandviewerAlignObj',{% endif %}
-	  linear_mouseover: '{{ varName|default:'' }}islandviewerAlignObj',
-	  linear_mouseout: '{{ varName|default:'' }}islandviewerAlignObj',
+	  linear_mouseclick: 'islandviewerAlignObj',{% endif %}
+	  linear_mouseover: 'islandviewerAlignObj',
+	  linear_mouseout: 'islandviewerAlignObj',
 	  items: [
 	    {% for gi in gis %}
 	       {% if gi.prediction_method == "Dimob" %}
@@ -83,9 +83,9 @@ var {{ varName|default:"circular" }}data = [
 	  trackType: "track",
 	  inner_radius: {{ int_inner_radius|default:215 }},
 	  outer_radius: {{ int_outer_radius|default:250 }},
-	  mouseover_callback: '{{ varName|default:'' }}islandviewerAlignObj',
-	  mouseout_callback: '{{ varName|default:'' }}islandviewerAlignObj',
-	  mouseclick: '{{ varName|default:'' }}islandviewerAlignObj',
+	  mouseover_callback: 'islandviewerAlignObj',
+	  mouseout_callback: 'islandviewerAlignObj',
+	  mouseclick: 'islandviewerAlignObj',
 	  skipLinear: true,
 	  items: [
 	    {% for gi in gis %}
@@ -122,9 +122,9 @@ var {{ varName|default:"circular" }}data = [
           linear_height: 5,
           linear_invert: true,
 	  showTooltip: true,
-	  linear_mouseover: '{{ varName|default:'' }}islandviewerAlignObj',
-	  linear_mouseout: '{{ varName|default:'' }}islandviewerAlignObj',
-          linear_mouseclick: '{{ varName|default:'' }}islandviewerAlignObj',
+	  linear_mouseover: 'islandviewerAlignObj',
+	  linear_mouseout: 'islandviewerAlignObj',
+          linear_mouseclick: 'islandviewerAlignObj',
 	  showTooltip: true,
 	  items: [
 	     {% for vir in vir_factors %}
@@ -146,7 +146,7 @@ var islandviewerObj = new Islandviewer('{{ aid }}', '{{ext_id}}', {{ genomesize|
 
 update_legend();
 
-var {{ plotName|default:"circular" }}layout = {genomesize: {{ genomesize }}, container: "{{ container }}", h: 500, w: 500, ExtraWidthX: 55, TranslateX: 25, ExtraWidthY: 40, TranslateY: 20, movecursor: true, dblclick: '{{ varName|default:'' }}islandviewerObj' };
+var {{ plotName|default:"circular" }}layout = {genomesize: {{ genomesize }}, container: "{{ container }}", h: 500, w: 500, ExtraWidthX: 55, TranslateX: 25, ExtraWidthY: 40, TranslateY: 20, movecursor: true, dblclick: '{{ varName|default:'' }}islandviewerObj', plotid: 'circularchart_' + ext_id };
 
 var {{ varName|default:"circular" }}containerid =  "{{ container }}".slice(1);
 $('{{ container }}').draggable({ handle: ".move_" +  {{ varName|default:"circular" }}containerid });
@@ -155,7 +155,7 @@ var {{ plotName|default:"circular" }}TrackObj = islandviewerObj.addCircularPlot(
 
 $('#loadingimg').remove();
 
-var {{ plotName|default:"circular" }}Linearlayout = {genomesize: {{ genomesize }}, container: "{{ container }}linear", width: 600, height: 135, bottom_margin:0};
+var {{ plotName|default:"circular" }}Linearlayout = {genomesize: {{ genomesize }}, container: "{{ container }}linear", width: 600, height: 135, bottom_margin:0, plotid: 'circularchartlinear_' + ext_id};
 //var {{ plotName|default:"circular" }}LinearTrack = new genomeTrack({{ plotName|default:"circular" }}Linearlayout, {{ plotName|default:"circular" }}data);
 var {{ plotName|default:"circular" }}LinearTrack = islandviewerObj.addLinearPlot({{ plotName|default:"circular" }}Linearlayout);
 
@@ -594,12 +594,12 @@ function load_second(aidParam, reloadParams) {
     // Update the tracks if any are turned off
     updateTracks(window.secondislandviewerObj);
 
-    var secondlayout = {genomesize: second_genomesize, container: "#rightplot", h: 500, w: 500, ExtraWidthX: 55, TranslateX: 25, ExtraWidthY: 40, TranslateY: 20, movecursor: true, plotid: 'circularchart' };
+    var secondlayout = {genomesize: second_genomesize, container: "#rightplot", h: 500, w: 500, ExtraWidthX: 55, TranslateX: 25, ExtraWidthY: 40, TranslateY: 20, movecursor: true, plotid: 'circularchart_' + ext_id };
 //    var secondTrackObj = new circularTrack(secondlayout, seconddata);
     window.secondTrackObj = secondislandviewerObj.addCircularPlot(secondlayout);    
     $('#rightplot').draggable({ handle: ".move_rightplot" });
 
-    var secondLinearlayout = {genomesize: second_genomesize, container: "#secondchartlinear", width: 600, height: 135, bottom_margin:0, plotid: 'circularchartlinear'};
+    var secondLinearlayout = {genomesize: second_genomesize, container: "#secondchartlinear", width: 600, height: 135, bottom_margin:0, plotid: 'circularchartlinear_' + ext_id};
 //    var secondLinearTrack = new genomeTrack(secondLinearlayout, seconddata);
     window.secondLinearTrack = secondislandviewerObj.addLinearPlot(secondLinearlayout);
 

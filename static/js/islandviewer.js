@@ -31,7 +31,10 @@ Islandviewer.prototype.onclick = function(trackname, d, plotid, skip_half_range)
 //    console.log(d);
 //    console.log(plotid);
 
-    if(plotid == 'circularchartlinear' || plotid == 'secondchartlinear') {
+    plotid_pieces = plotid.split('_');
+    plotid_root = plotid_pieces[0];
+    ext_id = plotid_pieces[1];
+    if(plotid_root == 'circularchartlinear' || plotid_root == 'secondchartlinear') {
 
       if(trackname == 'circularVirulence') {
 	var url = false;
@@ -142,7 +145,10 @@ Islandviewer.prototype.mouseover = function(trackname, d, plotid) {
 //    console.log(d);
 //    console.log(plotid);
 
-    if(plotid == 'circularchartlinear' || plotid == 'secondchartlinear' ) {
+    plotid_pieces = plotid.split('_');
+    plotid_root = plotid_pieces[0];
+    ext_id = plotid_pieces[1];
+    if(plotid_root == 'circularchartlinear' || plotid == 'secondchartlinear' ) {
       if(trackname == 'circularGenes') {
   	$('#gene_overlay_' + d.id).addClass("highlight_row");
       } else if((trackname == 'circularIslandpick') || (trackname == 'circularDimob') || (trackname == 'circularSigi')) {

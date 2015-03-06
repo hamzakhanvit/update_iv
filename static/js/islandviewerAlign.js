@@ -75,6 +75,7 @@ IslandviewerAlign.prototype.onclick = function(trackname, d, plotid,skip_half_ra
     console.log("value of d is " + d);
     console.log("value of skip_half_range is " + skip_half_range);
     console.log("value of trackname is " + trackname);
+    console.log("plotid is " + plotid);
     console.log("value of ext_id_circle_id is " + islandviewerAlignData[ext_id].circle_id);
     
     
