@@ -73,7 +73,7 @@ Islandviewer.prototype.onclick = function(trackname, d, plotid, skip_half_range)
 //	var url = 'http://www.ncbi.nlm.nih.gov/projects/sviewer/?id=' + this.ext_id + '&v=' + view_start + '..' + view_end + '&m=' + d.start + ',' + d.end;
 //	window.open(url);
       }
-    } else if(plotid == 'circularchart') {
+    } else if(plotid_root == 'circularchart') {
 
       if((trackname == 'circularIslandpick') || (trackname == 'circularDimob') || (trackname == 'circularSigi') || (trackname == 'circularIntegrated')) {
         clearTimeout(this.popup_timer);
@@ -102,7 +102,11 @@ Islandviewer.prototype.onclick = function(trackname, d, plotid, skip_half_range)
 
 Islandviewer.prototype.ondblclick = function(plotid, bp) {
 
-    if(plotid == 'circularchart') {
+    plotid_pieces = plotid.split('_');
+    plotid_root = plotid_pieces[0];
+    ext_id = plotid_pieces[1];
+
+    if(plotid_root == 'circularchart') {
 	var halfBP = (this.circularplot.brushEndBP - this.circularplot.brushStartBP) /2;
 
 	var newStart = Math.max(0, (bp - halfBP));
@@ -148,7 +152,7 @@ Islandviewer.prototype.mouseover = function(trackname, d, plotid) {
     plotid_pieces = plotid.split('_');
     plotid_root = plotid_pieces[0];
     ext_id = plotid_pieces[1];
-    if(plotid_root == 'circularchartlinear' || plotid == 'secondchartlinear' ) {
+    if(plotid_root == 'circularchartlinear' || plotid_root == 'secondchartlinear' ) {
       if(trackname == 'circularGenes') {
   	$('#gene_overlay_' + d.id).addClass("highlight_row");
       } else if((trackname == 'circularIslandpick') || (trackname == 'circularDimob') || (trackname == 'circularSigi')) {
@@ -157,7 +161,7 @@ Islandviewer.prototype.mouseover = function(trackname, d, plotid) {
         $('.gene_' + d.gene.replace('.', '')).addClass("highlight_row");
       }
 
-    } else if (plotid == 'circularchart') {
+    } else if (plotid_root == 'circularchart') {
       if((trackname == 'circularIslandpick') || (trackname == 'circularDimob') || (trackname == 'circularSigi') || (trackname == 'circularIntegrated')) {
 
         this.popup_d = d;
@@ -173,7 +177,11 @@ Islandviewer.prototype.mouseout = function(trackname, d, plotid) {
 //    console.log(d);
 //    console.log(plotid);
 
-    if(plotid == 'circularchartlinear' || plotid == 'secondchartlinear') {
+    plotid_pieces = plotid.split('_');
+    plotid_root = plotid_pieces[0];
+    ext_id = plotid_pieces[1];
+
+    if(plotid_root == 'circularchartlinear' || plotid_root == 'secondchartlinear') {
       if(trackname == 'circularGenes') {
   	$('#gene_overlay_' + d.id).removeClass("highlight_row");
       } else if((trackname == 'circularIslandpick') || (trackname == 'circularDimob') || (trackname == 'circularSigi')) {
@@ -182,7 +190,7 @@ Islandviewer.prototype.mouseout = function(trackname, d, plotid) {
         $('.gene_' + d.gene.replace('.', '')).removeClass("highlight_row");
       }
 
-    } else if (plotid == 'circularchart') {
+    } else if (plotid_root == 'circularchart') {
       if((trackname == 'circularIslandpick') || (trackname == 'circularDimob') || (trackname == 'circularSigi') || (trackname == 'circularIntegrated')) {
         clearTimeout(this.popup_timer);
       }

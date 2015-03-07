@@ -8,11 +8,6 @@ function IslandviewerAlign() {
     
         ext_id = islandviewerObj.ext_id;
     }
-    if('undefined' !== typeof islandviewerObj.second_extid) {
-    
-        ext_id = islandviewerObj.second_extid;
-    
-    }
     
     console.log(islandviewerObj);
     islandviewerAlignData[ext_id] = {};
@@ -24,16 +19,33 @@ function IslandviewerAlign() {
     
     console.log("The typeof is " + typeof(islandviewerObj.circularplot)); 
     
+    //Splitting the plotid into ext_id and plotid_root
+    //plotid_pieces = islandviewerObj.circularplot.layout.plotid.split('_');
+    //plotid_root = plotid_pieces[0];
+                  
+    
     if('undefined' !== typeof islandviewerObj.circularplot) {
- 
+                  
                   islandviewerAlignData[ext_id].circle_id = islandviewerObj.circularplot.layout.plotid;
-                  console.log("Circel Id is" + islandviewerAlignData[ext_id].circle_id);
+                  console.log("Circle Id is " + islandviewerAlignData[ext_id].circle_id);
+                  
+                  
+                  //islandviewerAlignData[ext_id].circle_id = plotid_root;
+                  //console.log("Circel Id is" + islandviewerAlignData[ext_id].circle_id);
    }
    
    if('undefined' !== typeof islandviewerObj.linearplot) {
              
             islandviewerAlignData[ext_id].linear_id = islandviewerObj.linearplot.layout.plotid;
-            console.log("Linear Id is" + islandviewerAlignData[ext_id].linear_id);
+            console.log("Linear Id is " + islandviewerAlignData[ext_id].linear_id);
+            
+            
+                  //plotid_pieces = islandviewerObj.linearplot.layout.plotid.split('_');
+                  //plotid_root = plotid_pieces[0];
+                  
+                  //islandviewerAlignData[ext_id].linear_id = plotid_root;
+                  //console.log("Linear Id is" + islandviewerAlignData[ext_id].linear_id);
+            
    }                      
        	 
    }
@@ -51,10 +63,11 @@ for (ext_id in islandviewerAlignData) {
 }
 
 IslandviewerAlign.prototype.mouseover = function(trackname, d, plotid) {
-   console.log("Got a callback " + d);
-    console.log(trackname);
-    console.log(d);
-    console.log(plotid);
+   console.log("Got a callback in mouseover func" + d);
+    console.log("Trackname in mouse over is "+trackname);
+    console.log("d in mouseover func "+d);
+    console.log("plotid in mouseover is " + plotid);
+    console.log("value of ext_id_circle_id in mouseover func is " + islandviewerAlignData[ext_id].circle_id);
 trackname = trackname;
 d=d;
 plotid=plotid;
@@ -76,11 +89,10 @@ IslandviewerAlign.prototype.onclick = function(trackname, d, plotid,skip_half_ra
     console.log("value of skip_half_range is " + skip_half_range);
     console.log("value of trackname is " + trackname);
     console.log("plotid is " + plotid);
-    console.log("value of ext_id_circle_id is " + islandviewerAlignData[ext_id].circle_id);
+    //console.log("value of ext_id_circle_id is " + islandviewerAlignData[ext_id].circle_id);
     
     
-
-    if('undefined' !== typeof islandviewerAlignData[ext_id].circle_id && plotid == islandviewerAlignData[ext_id].circle_id|| plotid ==  islandviewerAlignData[ext_id].linear_id) {
+    if('undefined' !== typeof islandviewerAlignData[ext_id].circle_id && plotid == islandviewerAlignData[ext_id].circle_id || plotid ==  islandviewerAlignData[ext_id].linear_id) {
 
         islandviewerObj.onclick(trackname, d, plotid, skip_half_range) 
 
