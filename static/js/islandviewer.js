@@ -31,7 +31,7 @@ Islandviewer.prototype.onclick = function(trackname, d, plotid, skip_half_range)
 //    console.log(d);
 //    console.log(plotid);
 
-    plotid_pieces = plotid.split('_');
+    plotid_pieces = plotid.split('|');
     plotid_root = plotid_pieces[0];
     ext_id = plotid_pieces[1];
     if(plotid_root == 'circularchartlinear' || plotid_root == 'secondchartlinear') {
@@ -102,7 +102,7 @@ Islandviewer.prototype.onclick = function(trackname, d, plotid, skip_half_range)
 
 Islandviewer.prototype.ondblclick = function(plotid, bp) {
 
-    plotid_pieces = plotid.split('_');
+    plotid_pieces = plotid.split('|');
     plotid_root = plotid_pieces[0];
     ext_id = plotid_pieces[1];
 
@@ -149,7 +149,7 @@ Islandviewer.prototype.mouseover = function(trackname, d, plotid) {
 //    console.log(d);
 //    console.log(plotid);
 
-    plotid_pieces = plotid.split('_');
+    plotid_pieces = plotid.split('|');
     plotid_root = plotid_pieces[0];
     ext_id = plotid_pieces[1];
     if(plotid_root == 'circularchartlinear' || plotid_root == 'secondchartlinear' ) {
@@ -177,7 +177,7 @@ Islandviewer.prototype.mouseout = function(trackname, d, plotid) {
 //    console.log(d);
 //    console.log(plotid);
 
-    plotid_pieces = plotid.split('_');
+    plotid_pieces = plotid.split('|');
     plotid_root = plotid_pieces[0];
     ext_id = plotid_pieces[1];
 

@@ -6,10 +6,13 @@ function IslandviewerAlign() {
     this.add_islandviewerObj = function(islandviewerObj){    
     if('undefined' !== typeof islandviewerObj.ext_id) {
     
-        ext_id = islandviewerObj.ext_id;
+	// Replace the . with nothing so these ext_ids match
+	// what we expect to see from a plotid
+        ext_id = islandviewerObj.ext_id.replace('.', '');
     }
     
     console.log(islandviewerObj);
+    console.log(ext_id);
     islandviewerAlignData[ext_id] = {};
     console.log("The ext_id is " + ext_id); 
     //var plotid = islandviewerObj.circularplot.layout.plotid;
@@ -18,6 +21,8 @@ function IslandviewerAlign() {
     //ivObj = islandviewerObj;
     
     console.log("The typeof is " + typeof(islandviewerObj.circularplot)); 
+
+    islandviewerAlignData[ext_id].obj = islandviewerObj;
     
     //Splitting the plotid into ext_id and plotid_root
     //plotid_pieces = islandviewerObj.circularplot.layout.plotid.split('_');
@@ -53,8 +58,27 @@ function IslandviewerAlign() {
 
 IslandviewerAlign.prototype.ondblclick = function(plotid, bp) {
 
+    // This could be broken in to a processing function,
+    // copying and pasting the same lines of code screams
+    // function or macro, but for now we'll be lazy and do this for
+    // clarity and expediency
+    plotid_pieces = plotid.split('|');
+    plotid_root = plotid_pieces[0];
+    ext_id = plotid_pieces[1];
+
+    if('undefined' !== typeof islandviewerAlignData[ext_id]) {
+	islandviewerAlignData[ext_id].obj.ondblclick(plotid, bp);
+    }
+
+    // Returning so I don't have to erase your code, just skip it
+    return;
+
 for (ext_id in islandviewerAlignData) {
   
+// !!!! Remember, you only care about if an IslandviewerObj has a circle or linear plot for if
+//      you're passing on locked move commands, for clicks, it's none of IslandviewerAlign's business,
+//      just pass it on
+
    if('undefined' !== typeof islandviewerAlignData[ext_id].circle_id  && plotid == islandviewerAlignData[ext_id].circle_id || plotid ==  islandviewerAlignData[ext_id].linear_id ) {
 
         islandviewerObj.ondblclick(plotid, bp)
@@ -71,6 +95,16 @@ IslandviewerAlign.prototype.mouseover = function(trackname, d, plotid) {
 trackname = trackname;
 d=d;
 plotid=plotid;
+
+    plotid_pieces = plotid.split('|');
+    plotid_root = plotid_pieces[0];
+    ext_id = plotid_pieces[1];
+
+    if('undefined' !== typeof islandviewerAlignData[ext_id]) {
+	islandviewerAlignData[ext_id].obj.mouseover(trackname, d, plotid);
+    }
+
+    return;
 
 for (ext_id in islandviewerAlignData) {
   
@@ -91,7 +125,16 @@ IslandviewerAlign.prototype.onclick = function(trackname, d, plotid,skip_half_ra
     console.log("plotid is " + plotid);
     //console.log("value of ext_id_circle_id is " + islandviewerAlignData[ext_id].circle_id);
     
-    
+    plotid_pieces = plotid.split('|');
+    plotid_root = plotid_pieces[0];
+    ext_id = plotid_pieces[1];
+    console.log(ext_id);
+    if('undefined' !== typeof islandviewerAlignData[ext_id]) {
+	islandviewerAlignData[ext_id].obj.onclick(trackname, d, plotid, skip_half_range);
+    }
+
+    return;
+
     if('undefined' !== typeof islandviewerAlignData[ext_id].circle_id && plotid == islandviewerAlignData[ext_id].circle_id || plotid ==  islandviewerAlignData[ext_id].linear_id) {
 
         islandviewerObj.onclick(trackname, d, plotid, skip_half_range) 
@@ -101,10 +144,20 @@ IslandviewerAlign.prototype.onclick = function(trackname, d, plotid,skip_half_ra
 
 
 IslandviewerAlign.prototype.mouseout = function(trackname, d, plotid) {
-//    console.log("mouseout callback " + d);
+    console.log("mouseout callback " + d);
 //    console.log(trackname);
 //    console.log(d);
-//    console.log(plotid);
+    console.log(plotid);
+
+    plotid_pieces = plotid.split('|');
+    plotid_root = plotid_pieces[0];
+    ext_id = plotid_pieces[1];
+    console.log(ext_id);
+    if('undefined' !== typeof islandviewerAlignData[ext_id]) {
+	islandviewerAlignData[ext_id].obj.mouseout(trackname, d, plotid);
+    }
+
+    return;
 
 for (ext_id in islandviewerAlignData) {
   
@@ -118,6 +171,22 @@ for (ext_id in islandviewerAlignData) {
 
 IslandviewerAlign.prototype.update = function(startBP, endBP, params) {
 
+    if('undefined' == typeof params['plotid']) {
+	console.log("Uh-oh, why is there no plotid?");
+	return;
+    }
+
+    
+    plotid_pieces = params['plotid'].split('|');
+    plotid_root = plotid_pieces[0];
+    ext_id = plotid_pieces[1];
+
+    if('undefined' !== typeof islandviewerAlignData[ext_id]) {
+	islandviewerAlignData[ext_id].obj.update(startBP, endBP, params);
+    }
+
+    return;
+
 for (ext_id in islandviewerAlignData) {
   
    if('undefined' !== typeof islandviewerAlignData[ext_id].circle_id && params['plotid'] == islandviewerAlignData[ext_id].circle_id ||  params['plotid'] == islandviewerAlignData[ext_id].linear_id) {
@@ -130,6 +199,22 @@ for (ext_id in islandviewerAlignData) {
 
 IslandviewerAlign.prototype.update_finished = function(startBP, endBP, params) {
 
+    if('undefined' == typeof params['plotid']) {
+	console.log("Uh-oh, why is there no plotid?");
+	return;
+    }
+
+    
+    plotid_pieces = params['plotid'].split('|');
+    plotid_root = plotid_pieces[0];
+    ext_id = plotid_pieces[1];
+
+    if('undefined' !== typeof islandviewerAlignData[ext_id]) {
+	islandviewerAlignData[ext_id].obj.update_finished(startBP, endBP, params);
+    }
+
+    return;
+
 for (ext_id in islandviewerAlignData) {
   
    if('undefined' !== typeof islandviewerAlignData[ext_id].circle_id && params['plotid'] == islandviewerAlignData[ext_id].circle_id ||  params['plotid'] == islandviewerAlignData[ext_id].linear_id) {
@@ -139,7 +224,15 @@ for (ext_id in islandviewerAlignData) {
 }
 }
 
-IslandviewerAlign.prototype.remove = function(Obj_to_remove) {
+IslandviewerAlign.prototype.remove = function(ext_id) {
+
+        shortened_ext_id = islandviewerObj.ext_id.replace('.', '');
+
+    if('undefined' !== typeof islandviewerAlignData[shortened_ext_id]) {
+	delete islandviewerAlignData[shortened_ext_id];
+    }
+
+    return;
 
 remove_id = Obj_to_remove.ext_id;
 
