@@ -160,8 +160,8 @@ var {{ plotName|default:"circular" }}Linearlayout = {genomesize: {{ genomesize }
 //var {{ plotName|default:"circular" }}LinearTrack = new genomeTrack({{ plotName|default:"circular" }}Linearlayout, {{ plotName|default:"circular" }}data);
 var {{ plotName|default:"circular" }}LinearTrack = islandviewerObj.addLinearPlot({{ plotName|default:"circular" }}Linearlayout);
 
-{{ plotName|default:"circular" }}TrackObj.attachBrush({{ plotName|default:"circular" }}LinearTrack);
-{{ plotName|default:"circular" }}LinearTrack.addBrushCallback({{ plotName|default:"circular" }}TrackObj);
+{{ plotName|default:"circular" }}TrackObj.attachBrush(islandviewerObj);
+{{ plotName|default:"circular" }}LinearTrack.addBrushCallback(islandviewerObj);
 
 {{ plotName|default:"circular" }}TrackObj.attachBrush(islandviewerObj);
 {{ plotName|default:"circular" }}LinearTrack.addBrushCallback(islandviewerObj);
@@ -246,6 +246,37 @@ function updateVirulence(cb, vir) {
       }
       //  }
 }
+
+/*
+function lock_status(cb){
+    if(cb.checked) {
+        console.log("Lock checkbox is On");
+        var flag = 1;
+        islandviewerAlignObj.lock(flag);
+        
+    }
+}
+*/
+
+
+function lock_status()
+{
+  if(document.getElementById('lockplots').checked){
+  console.log("Lock checkbox is On");
+        var flag = 1;
+        islandviewerAlignObj.lock(flag);
+        
+  }
+  else{
+  
+  console.log("Lock checkbox is Off");
+        var flag = 0;
+        islandviewerAlignObj.lock(flag);
+        
+  
+  }
+}
+
 
 function updateTracks(ivObj) {
        $('input:checkbox.islandmethod:not(:checked)').each(function () {
@@ -606,8 +637,8 @@ function load_second(aidParam, reloadParams) {
 //    var secondLinearTrack = new genomeTrack(secondLinearlayout, seconddata);
     window.secondLinearTrack = secondislandviewerObj.addLinearPlot(secondLinearlayout);
 
-    secondTrackObj.attachBrush(secondLinearTrack);
-    secondLinearTrack.addBrushCallback(secondTrackObj);
+    secondTrackObj.attachBrush(islandviewerObj);
+    secondLinearTrack.addBrushCallback(islandviewerObj);
 
     secondTrackObj.attachBrush(secondislandviewerObj);
     secondLinearTrack.addBrushCallback(secondislandviewerObj);

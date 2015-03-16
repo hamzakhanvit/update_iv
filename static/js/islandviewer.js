@@ -202,12 +202,37 @@ Islandviewer.prototype.mouseout = function(trackname, d, plotid) {
 // objects (linear, circular)
 
     Islandviewer.prototype.update = function(startBP, endBP, params) {
-
+    var plotid = 'none';
+    if('undefined' !== typeof params && 'undefined' !== typeof params['plotid']) {
+        plotid_pieces = params['plotid'].split('|');
+        plotid = plotid_pieces[0];
+    }
+    
+	if(plotid !== 'circularchartlinear' && 'undefined' !== typeof this.linearplot) {
+	    this.linearplot.update(startBP, endBP, params);
+	} else if(plotid !== 'circularchart' && 'undefined' !== typeof this.circularplot) {
+	    this.circularplot.update(startBP, endBP, params);
+	}
+	console.log(params);
 }
 
 Islandviewer.prototype.update_finished = function(startBP, endBP, params) {
     url = '../../json/genes/?aid=' + this.aid + '&ext_id=' + this.ext_id + '&start=' + parseInt(startBP) + '&end=' + parseInt(endBP);
     self = this;
+
+    var plotid = 'none';
+    if('undefined' !== typeof params && 'undefined' !== typeof params['plotid']) {
+        plotid_pieces = params['plotid'].split('|');
+        plotid = plotid_pieces[0];
+    }
+
+    if(plotid !== 'circularchartlinear' && 'undefined' !== typeof this.linearplot) {
+	this.linearplot.update_finished(startBP, endBP, params);
+    } else if(plotid !== 'circularchart' && 'undefined' !== typeof this.circularplot) {
+	this.circularplot.update_finished(startBP, endBP, params);
+    }
+
+
 
     this.startBP = startBP;
     this.endBP = endBP;

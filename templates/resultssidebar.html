@@ -16,6 +16,11 @@
   <span class="{{ plotName|default:"circular" }}Virulence_ARDB"><input type="checkbox" class="methodcheckbox virulencemethod showARDB showCARD" id="showARDB" name="showARDB" onchange="updateVirulence(this, 'ARDB'); return false;" checked>Curated resistance genes</span><span id="noARDB" class="nomethodtext noCARD noARDB"> (No results found)</span><br />
   <span class="{{ plotName|default:"circular" }}Virulence_RGI"><input type="checkbox" class="methodcheckbox virulencemethod showRGI" id="showRGI" name="showRGI" onchange="updateVirulence(this, 'RGI'); return false;" checked>Homologs of resistance genes</span><span id="noRGI" class="nomethodtext noRGI"> (No results found)</span><br />
   <span class="{{ plotName|default:"circular" }}Virulence_PAG"><input type="checkbox" class="methodcheckbox virulencemethod showPAG" id="showPAG" name="showPAG" onchange="updateVirulence(this, 'PAG'); return false;" checked>Pathogen-associated genes</span><span id="noPAG" class="nomethodtext noPAG"> (No results found)</span><br />
+
+&nbsp;<br />
+<span class="sectionHeader">Sync plots</span></br />
+  
+  <input type="checkbox" id="lockplots" name="lockplots" onclick="lock_status();"/> Lock On/Off
 </div>
 <p>&nbsp;</p>
 <div id="toolbox" class="outline">

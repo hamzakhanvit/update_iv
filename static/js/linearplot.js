@@ -875,7 +875,7 @@ genomeTrack.prototype.displayAxis = function() {
 }
 
     genomeTrack.prototype.update = function(startbp, endbp, params) {
-    //    console.log(startbp, endbp);
+        console.log(startbp, endbp);
 
     this.visStart = startbp;
     this.visEnd = endbp;
@@ -886,7 +886,7 @@ genomeTrack.prototype.displayAxis = function() {
 }
 
 genomeTrack.prototype.update_finished = function(startbp, endbp, params) {
-    //    console.log("Thank you, got: " + startbp, endbp);
+        console.log("Thank you, got: " + startbp, endbp);
 
 }
 
