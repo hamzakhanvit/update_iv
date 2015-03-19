@@ -1,6 +1,7 @@
 function Islandviewer(aid, ext_id, genomesize, genomename, trackdata) {
     this.aid = aid;
     this.ext_id = ext_id;
+    this.compact_ext_id = this.ext_id.replace('.', '');
     this.genomesize = genomesize;
     this.genomename = genomename;
     this.trackdata = trackdata;
@@ -206,11 +207,13 @@ Islandviewer.prototype.mouseout = function(trackname, d, plotid) {
     if('undefined' !== typeof params && 'undefined' !== typeof params['plotid']) {
         plotid_pieces = params['plotid'].split('|');
         plotid = plotid_pieces[0];
+        ext_id = plotid_pieces[1];
     }
     
-	if(plotid !== 'circularchartlinear' && 'undefined' !== typeof this.linearplot) {
+    if((plotid !== 'circularchartlinear' || ext_id !== this.compact_ext_id ) && 'undefined' !== typeof this.linearplot) {
 	    this.linearplot.update(startBP, endBP, params);
-	} else if(plotid !== 'circularchart' && 'undefined' !== typeof this.circularplot) {
+	} 
+    if((plotid !== 'circularchart' || ext_id !== this.compact_ext_id ) && 'undefined' !== typeof this.circularplot) {
 	    this.circularplot.update(startBP, endBP, params);
 	}
 	console.log(params);

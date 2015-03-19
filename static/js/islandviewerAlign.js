@@ -78,11 +78,13 @@ IslandviewerAlign.prototype.setlock = function(flag) {
 
 }
 
-IslandviewerAlign.prototype.lock = function() {
+IslandviewerAlign.prototype.lock = function(params) {
      console.log("First ext id is "+first_ext_id);
      
      var newStart = islandviewerAlignData[first_ext_id].obj.circularplot.brushStartBP;
      var newEnd = islandviewerAlignData[first_ext_id].obj.circularplot.brushEndBP; 
+
+     console.log("new coords " + newStart + ", " + newEnd);
          
      for (ext_id in islandviewerAlignData){
 
@@ -90,15 +92,20 @@ IslandviewerAlign.prototype.lock = function() {
              console.log("Skipping " + ext_id + ", it's the primary one");
              continue;
          }
+
+         if('undefined' !== typeof islandviewerAlignData[ext_id].obj) {
+             console.log("Updating " + ext_id);
+             islandviewerAlignData[ext_id].obj.update(newStart, newEnd, params);
+         }
      //console.log(islandviewerAlignData[ext_id].obj);
      //console.log(islandviewerAlignData[ext_id].obj.circularplot.brushStartBP);
-     plot_id =  islandviewerAlignData[ext_id].obj.linearplot.layout.plotid;
-     islandviewerAlignData[ext_id].obj.linearplot.update(newStart, newEnd);
+         //     plot_id =  islandviewerAlignData[ext_id].obj.linearplot.layout.plotid;
+         //     islandviewerAlignData[ext_id].obj.linearplot.update(newStart, newEnd);
      
-     islandviewerAlignData[ext_id].obj.circularplot.moveBrushbyBP(newStart, newEnd);
-     islandviewerAlignData[ext_id].obj.circularplot.showBrush();
-     islandviewerAlignData[ext_id].obj.showHoverGenes({start: newStart, end: newEnd}, false);
-     islandviewerAlignData[ext_id].obj.update_finished(newStart, newEnd);
+         //     islandviewerAlignData[ext_id].obj.circularplot.moveBrushbyBP(newStart, newEnd);
+         //     islandviewerAlignData[ext_id].obj.circularplot.showBrush();
+         //     islandviewerAlignData[ext_id].obj.showHoverGenes({start: newStart, end: newEnd}, false);
+         //     islandviewerAlignData[ext_id].obj.update_finished(newStart, newEnd);
      
      }
      
@@ -289,47 +296,15 @@ IslandviewerAlign.prototype.update = function(startBP, endBP, params) {
     if(lock_flag == 1)
     {
         islandviewerAlignData[first_ext_id].obj.update(startBP, endBP, params);
-        this.lock();
-        //        for (key in islandviewerAlignData){
-        //        plot_id =  islandviewerAlignData[key].obj.linearplot.layout.plotid;
-        //        console.log("update func plotid is "+islandviewerAlignData[key].obj.linearplot.layout.plotid);
-        //        islandviewerAlignData[key].obj.update(startBP, endBP, plot_id);
-       // plot_id =  islandviewerAlignData[key].obj.circularplot.layout.plotid;
-       // console.log("update func plotid is "+islandviewerAlignData[key].obj.circularplot.layout.plotid);
-        //islandviewerAlignData[key].obj.update(startBP, endBP, plot_id);
-     
-        //        }
+        this.lock(params);
     } else {
         
         if('undefined' !== typeof islandviewerAlignData[ext_id]) {
             islandviewerAlignData[ext_id].obj.update(startBP, endBP, params);
         }
    }
-   /* try{
-    if('undefined' !== typeof islandviewerAlignData[ext_id]) {
-	islandviewerAlignData[ext_id].obj.update(startBP, endBP, params);
-	 }
-	 }
-	finally{
-     if(lock_flag == 1){
-            var a =1;
-            islandviewerAlignObj.lock(a);
-        }
-    }
-	
-    */
 
     return;
-
-for (ext_id in islandviewerAlignData) {
-  
-   if('undefined' !== typeof islandviewerAlignData[ext_id].circle_id && params['plotid'] == islandviewerAlignData[ext_id].circle_id ||  params['plotid'] == islandviewerAlignData[ext_id].linear_id) {
-
-    islandviewerObj.update(startBP, endBP, params)
-    
- 
-    }
-}
 }
 
 
@@ -346,47 +321,19 @@ IslandviewerAlign.prototype.update_finished = function(startBP, endBP, params) {
     ext_id = plotid_pieces[1];
    
    
-   if(lock_flag == 1)
+    if(lock_flag == 1)
     {
-     for (key in islandviewerAlignData){
-     plot_id =  islandviewerAlignData[key].obj.linearplot.layout.plotid;
-     islandviewerAlignData[key].obj.update_finished(startBP, endBP, plot_id);
-     plot_id =  islandviewerAlignData[key].obj.circularplot.layout.plotid;
-     islandviewerAlignData[key].obj.update_finished(startBP, endBP, plot_id);
-    }
-    }
-    if(lock_flag == 0){
-    if('undefined' !== typeof islandviewerAlignData[ext_id]) {
-	islandviewerAlignData[ext_id].obj.update_finished(startBP, endBP, params);
-	 }
-   }
-   
-   
-   
-   /* try{
-    if('undefined' !== typeof islandviewerAlignData[ext_id]) {
-	islandviewerAlignData[ext_id].obj.update_finished(startBP, endBP, params);
-     }
-     }
-     finally{
-     if(lock_flag == 1){
-            var a =1;
-            islandviewerAlignObj.lock(a);
+        islandviewerAlignData[first_ext_id].obj.update_finished(startBP, endBP, params);
+        this.lock();
+    } else {
+        
+        if('undefined' !== typeof islandviewerAlignData[ext_id]) {
+            islandviewerAlignData[ext_id].obj.update_finished(startBP, endBP, params);
         }
-    }
-    
-    */
-
+   }
+ 
     return;
 
-for (ext_id in islandviewerAlignData) {
-  
-   if('undefined' !== typeof islandviewerAlignData[ext_id].circle_id && params['plotid'] == islandviewerAlignData[ext_id].circle_id ||  params['plotid'] == islandviewerAlignData[ext_id].linear_id) {
-    
-      islandviewerObj.update_finished(startBP, endBP, params)
-   
-    }
-}
 }
 
 IslandviewerAlign.prototype.remove = function(ext_id) {
