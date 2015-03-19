@@ -142,6 +142,8 @@ var {{ varName|default:"circular" }}_aid = "{{ aid }}";
 {% comment %}Skip the entire code section if we're just pulling in another plot's data{% endcomment %}
 {% if not skip_initialize %}
 
+var islandviewerAlignObj = new IslandviewerAlign();
+
 var islandviewerObj = new Islandviewer('{{ aid }}', '{{ext_id}}', {{ genomesize|default:"0" }}, "{{ genomename }}", {{ plotName|default:"circular" }}data);
 
 update_legend();
@@ -160,11 +162,11 @@ var {{ plotName|default:"circular" }}Linearlayout = {genomesize: {{ genomesize }
 //var {{ plotName|default:"circular" }}LinearTrack = new genomeTrack({{ plotName|default:"circular" }}Linearlayout, {{ plotName|default:"circular" }}data);
 var {{ plotName|default:"circular" }}LinearTrack = islandviewerObj.addLinearPlot({{ plotName|default:"circular" }}Linearlayout);
 
-{{ plotName|default:"circular" }}TrackObj.attachBrush(islandviewerObj);
-{{ plotName|default:"circular" }}LinearTrack.addBrushCallback(islandviewerObj);
+{{ plotName|default:"circular" }}TrackObj.attachBrush(islandviewerAlignObj);
+{{ plotName|default:"circular" }}LinearTrack.addBrushCallback(islandviewerAlignObj);
 
-{{ plotName|default:"circular" }}TrackObj.attachBrush(islandviewerObj);
-{{ plotName|default:"circular" }}LinearTrack.addBrushCallback(islandviewerObj);
+{{ plotName|default:"circular" }}TrackObj.attachBrush(islandviewerAlignObj);
+{{ plotName|default:"circular" }}LinearTrack.addBrushCallback(islandviewerAlignObj);
 
 $('#gene_dialog').dialog( { position: { my: "left top", at: "right top", of: "{{ container }}" },
 	                    height: 550, width: 450,
@@ -175,8 +177,7 @@ $('#gene_dialog').dialog( { position: { my: "left top", at: "right top", of: "{{
 	}
 	    } );
 
-var islandviewerAlignObj = new IslandviewerAlign();
-    islandviewerAlignObj.add_islandviewerObj(islandviewerObj);
+islandviewerAlignObj.add_islandviewerObj(islandviewerObj);
 
 
 //$('#genome_selector_dialog').dialog( { position: { my: "center", at: "center", of: window },
@@ -264,14 +265,14 @@ function lock_status()
   if(document.getElementById('lockplots').checked){
   console.log("Lock checkbox is On");
         var flag = 1;
-        islandviewerAlignObj.lock(flag);
+        islandviewerAlignObj.setlock(true);
         
   }
   else{
   
   console.log("Lock checkbox is Off");
         var flag = 0;
-        islandviewerAlignObj.lock(flag);
+        islandviewerAlignObj.setlock(false);
         
   
   }
@@ -637,11 +638,11 @@ function load_second(aidParam, reloadParams) {
 //    var secondLinearTrack = new genomeTrack(secondLinearlayout, seconddata);
     window.secondLinearTrack = secondislandviewerObj.addLinearPlot(secondLinearlayout);
 
-    secondTrackObj.attachBrush(islandviewerObj);
-    secondLinearTrack.addBrushCallback(islandviewerObj);
+    secondTrackObj.attachBrush(islandviewerAlignObj);
+    secondLinearTrack.addBrushCallback(islandviewerAlignObj);
 
-    secondTrackObj.attachBrush(secondislandviewerObj);
-    secondLinearTrack.addBrushCallback(secondislandviewerObj);
+    secondTrackObj.attachBrush(islandviewerAlignObj);
+    secondLinearTrack.addBrushCallback(islandviewerAlignObj);
 
     // Move the brush to the first island
     for(var i=0; i < seconddata.length; i++) {

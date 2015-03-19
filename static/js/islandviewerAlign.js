@@ -68,14 +68,28 @@ function IslandviewerAlign() {
 
 
 var lock_flag = 0;
-IslandviewerAlign.prototype.lock = function(flag) {
+IslandviewerAlign.prototype.setlock = function(flag) {
      lock_flag = flag;    
+     console.log("lock set to: " + lock_flag);
+
+     if(lock_flag) {
+         this.lock();
+     }
+
+}
+
+IslandviewerAlign.prototype.lock = function() {
      console.log("First ext id is "+first_ext_id);
      
      var newStart = islandviewerAlignData[first_ext_id].obj.circularplot.brushStartBP;
      var newEnd = islandviewerAlignData[first_ext_id].obj.circularplot.brushEndBP; 
          
      for (ext_id in islandviewerAlignData){
+
+         if(ext_id === first_ext_id) {
+             console.log("Skipping " + ext_id + ", it's the primary one");
+             continue;
+         }
      //console.log(islandviewerAlignData[ext_id].obj);
      //console.log(islandviewerAlignData[ext_id].obj.circularplot.brushStartBP);
      plot_id =  islandviewerAlignData[ext_id].obj.linearplot.layout.plotid;
@@ -274,20 +288,22 @@ IslandviewerAlign.prototype.update = function(startBP, endBP, params) {
      console.log("lock flag in update is "+ lock_flag);
     if(lock_flag == 1)
     {
-        for (key in islandviewerAlignData){
-        plot_id =  islandviewerAlignData[key].obj.linearplot.layout.plotid;
-        console.log("update func plotid is "+islandviewerAlignData[key].obj.linearplot.layout.plotid);
-        islandviewerAlignData[key].obj.update(startBP, endBP, plot_id);
+        islandviewerAlignData[first_ext_id].obj.update(startBP, endBP, params);
+        this.lock();
+        //        for (key in islandviewerAlignData){
+        //        plot_id =  islandviewerAlignData[key].obj.linearplot.layout.plotid;
+        //        console.log("update func plotid is "+islandviewerAlignData[key].obj.linearplot.layout.plotid);
+        //        islandviewerAlignData[key].obj.update(startBP, endBP, plot_id);
        // plot_id =  islandviewerAlignData[key].obj.circularplot.layout.plotid;
        // console.log("update func plotid is "+islandviewerAlignData[key].obj.circularplot.layout.plotid);
         //islandviewerAlignData[key].obj.update(startBP, endBP, plot_id);
      
+        //        }
+    } else {
+        
+        if('undefined' !== typeof islandviewerAlignData[ext_id]) {
+            islandviewerAlignData[ext_id].obj.update(startBP, endBP, params);
         }
-    }
-    if(lock_flag ==0){
-    if('undefined' !== typeof islandviewerAlignData[ext_id]) {
-	islandviewerAlignData[ext_id].obj.update(startBP, endBP, params);
-	 }
    }
    /* try{
     if('undefined' !== typeof islandviewerAlignData[ext_id]) {
