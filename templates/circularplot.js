@@ -149,7 +149,7 @@ var islandviewerObj = new Islandviewer('{{ aid }}', '{{ext_id}}', {{ genomesize|
 update_legend();
 
 var shortened_ext_id = '{{ ext_id }}'.replace('.', '');
-var {{ plotName|default:"circular" }}layout = {genomesize: {{ genomesize }}, container: "{{ container }}", h: 500, w: 500, ExtraWidthX: 55, TranslateX: 25, ExtraWidthY: 40, TranslateY: 20, movecursor: true, dblclick: '{{ varName|default:'' }}islandviewerObj', plotid: 'circularchart|' + shortened_ext_id };
+var {{ plotName|default:"circular" }}layout = {genomesize: {{ genomesize }}, container: "{{ container }}", h: 500, w: 500, ExtraWidthX: 55, TranslateX: 25, ExtraWidthY: 40, TranslateY: 20, movecursor: true, dblclick: '{{ varName|default:'' }}islandviewerAlignObj', plotid: 'circularchart|' + shortened_ext_id };
 
 var {{ varName|default:"circular" }}containerid =  "{{ container }}".slice(1);
 $('{{ container }}').draggable({ handle: ".move_" +  {{ varName|default:"circular" }}containerid });
@@ -629,7 +629,7 @@ function load_second(aidParam, reloadParams) {
     // Update the tracks if any are turned off
     updateTracks(window.secondislandviewerObj);
 
-   var secondlayout = {genomesize: second_genomesize, container: "#rightplot", h: 500, w: 500, ExtraWidthX: 55, TranslateX: 25, ExtraWidthY: 40, TranslateY: 20, movecursor: true, plotid: 'circularchart', dblclick: 'secondislandviewerObj' };
+   var secondlayout = {genomesize: second_genomesize, container: "#rightplot", h: 500, w: 500, ExtraWidthX: 55, TranslateX: 25, ExtraWidthY: 40, TranslateY: 20, movecursor: true, plotid: 'circularchart', dblclick: 'islandviewerAlignObj' };
 //    var secondTrackObj = new circularTrack(secondlayout, seconddata);
     window.secondTrackObj = secondislandviewerObj.addCircularPlot(secondlayout);    
     $('#rightplot').draggable({ handle: ".move_rightplot" });

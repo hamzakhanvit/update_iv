@@ -127,6 +127,18 @@ IslandviewerAlign.prototype.ondblclick = function(plotid, bp) {
     plotid_root = plotid_pieces[0];
     ext_id = plotid_pieces[1];
 
+    if(lock_flag == 1)
+    {
+        islandviewerAlignData[first_ext_id].obj.ondblclick(plotid, bp);
+        this.lock({plotid: plotid});
+    } else {
+        
+        if('undefined' !== typeof islandviewerAlignData[ext_id]) {
+            islandviewerAlignData[ext_id].obj.ondblclick(plotid, bp);
+        }
+   }
+
+    return;
 
     try{
     if('undefined' !== typeof islandviewerAlignData[ext_id]) {
