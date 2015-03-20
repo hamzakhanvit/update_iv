@@ -123,11 +123,12 @@ IslandviewerAlign.prototype.ondblclick = function(plotid, bp) {
     // copying and pasting the same lines of code screams
     // function or macro, but for now we'll be lazy and do this for
     // clarity and expediency
+    console.log("PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPlotid in ondblclick " + plotid);
     plotid_pieces = plotid.split('|');
     plotid_root = plotid_pieces[0];
     ext_id = plotid_pieces[1];
 
-
+/*
     try{
     if('undefined' !== typeof islandviewerAlignData[ext_id]) {
 	islandviewerAlignData[ext_id].obj.ondblclick(plotid, bp);
@@ -140,6 +141,24 @@ IslandviewerAlign.prototype.ondblclick = function(plotid, bp) {
             islandviewerAlignObj.lock(a);
         }
     }
+    
+  */  
+    
+    
+    
+    if(lock_flag == 1)
+    {
+        islandviewerAlignData[first_ext_id].obj.ondblclick(plotid, bp);
+        this.lock(params);
+    } else {
+        
+        if('undefined' !== typeof islandviewerAlignData[ext_id]) {
+            islandviewerAlignData[ext_id].obj.ondblclick(plotid, bp);
+        }
+   }
+    
+    
+    
     
 
     // Returning so I don't have to erase your code, just skip it
@@ -231,7 +250,7 @@ IslandviewerAlign.prototype.onclick = function(trackname, d, plotid,skip_half_ra
     plotid_pieces = plotid.split('|');
     plotid_root = plotid_pieces[0];
     ext_id = plotid_pieces[1];
-    console.log(ext_id);
+    console.log("ext_id " + ext_id);
     try{
     if('undefined' !== typeof islandviewerAlignData[ext_id]) {
 	islandviewerAlignData[ext_id].obj.onclick(trackname, d, plotid, skip_half_range);

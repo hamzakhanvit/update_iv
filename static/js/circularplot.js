@@ -70,7 +70,7 @@ function circularTrack(layout,tracks) {
 		var fn = window[this.layout.dblclick];
 
 		if('object' ==  typeof fn) {
-		    return fn.ondblclick(this.layout.plotid, curBP);
+		    return fn.ondblclick(this.layout.plotid, curBP); //This needs to be altered. plotid does not have an accession number
 		} else if('function' == typeof fn) {
 		    return fn(this.layout.plotid, curBP);
 		}
