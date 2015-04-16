@@ -78,6 +78,44 @@ IslandviewerAlign.prototype.setlock = function(flag) {
 
 }
 
+IslandviewerAlign.prototype.ivknob = function(flag, params) {
+
+
+console.log("IV KNOB IS ON ");
+console.log("IV KNOB VALUE IS "+flag);
+
+ var newStart = islandviewerAlignData[first_ext_id].obj.circularplot.brushStartBP+flag;
+ var newEnd = islandviewerAlignData[first_ext_id].obj.circularplot.brushEndBP+flag; 
+
+for (ext_id in islandviewerAlignData){
+
+         if(ext_id === first_ext_id) {
+             continue;
+         }
+
+         if('undefined' !== typeof islandviewerAlignData[ext_id].obj) {
+             console.log("Updating " + ext_id);
+             islandviewerAlignData[ext_id].obj.update(newStart, newEnd, params);
+         }
+         
+         }
+/*Once this is also called through lock_status()
+
+Retrieve the genome sizes of both the plots
+The offset range will be set equal to the difference in genome size of both the plots.
+Change the result.html file to include - 
+
+<div class="knob" >
+        <input class="knob" data-width="100" data-max="max difference between genome sizes" data-min="0" data-displayPrevious=true value="0">
+        </div>
+ 
+Retrieve the current brush positions of the smaller plot.
+
+Change the position of the brush as the knob changes.
+*/
+
+}
+
 IslandviewerAlign.prototype.lock = function(params) {
      console.log("First ext id is "+first_ext_id);
      
@@ -123,12 +161,12 @@ IslandviewerAlign.prototype.ondblclick = function(plotid, bp) {
     // copying and pasting the same lines of code screams
     // function or macro, but for now we'll be lazy and do this for
     // clarity and expediency
-    console.log("PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPlotid in ondblclick " + plotid);
+    console.log("Plotid in ondblclick " + plotid);
     plotid_pieces = plotid.split('|');
     plotid_root = plotid_pieces[0];
     ext_id = plotid_pieces[1];
 
-<<<<<<< HEAD
+//<<<<<<< HEAD
 /*
 =======
     if(lock_flag == 1)

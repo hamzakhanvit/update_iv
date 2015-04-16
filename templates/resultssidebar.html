@@ -1,4 +1,5 @@
 {% load virulencefactors %}
+{% load static %} 
 <span class="smalltext">
 <p>Predicted genomic islands and virulence/resistance gene annotations (when available) are coloured within the images based on the legend.  Individual items for display can be selected below. (<a href="javascript:feature_tour();">Take a tour</a> for a description of how to navigate this page)</p>
 <div id="legend" class="outline">
@@ -23,6 +24,7 @@
   <input type="checkbox" id="lockplots" name="lockplots" onclick="lock_status();"/> Lock On/Off
 </div>
 <p>&nbsp;</p>
+
 <div id="toolbox" class="outline">
 <span class="subHeader">Toolbox</span>
 <div class="toolbox_item"><a href="javascript:show_genome_dialog();" id="show_second_link">Visualize two genomes</a></div>
@@ -37,3 +39,104 @@
   <li><a href="http://www.sanger.ac.uk/Software/Artemis/">Artemis</a> (with  <a href="download_table.php?query_input=NC_002516.2&view=0&type=gbk">GenBank </a>file) can be used to conduct further analysis of GIs. Artemis can be easily run using the <a href="http://www.sanger.ac.uk/Software/Artemis/v11/u5.5/Artemis.jnlp">web start version</a>.</li>
   <li><a href="http://asap.ahabs.wisc.edu/mauve/">Mauve  </a> (using <a href="download_table.php?query_input=NC_002516.2&view=0&type=gbk">GenBank </a>file) can be used to produce whole genome alignments and view conserved regions surronding GIs. </li>	
 </span>
+
+
+
+
+     
+<script src="{% static 'js/jquery.knob.js' %}"></script>
+<script src="{% static 'js/excanvas.js' %}"></script>
+<script>
+            $(function($) {
+
+                $(".knob").knob({
+                    change : function (value) {
+                        //console.log("change : " + value);
+                        islandviewerAlignObj.ivknob(value);
+                    },
+                    release : function (value) {
+                        //console.log(this.$.attr('value'));
+                        //console.log("release : " + value);
+                        islandviewerAlignObj.ivknob(value);
+                    },
+                    cancel : function () {
+                        console.log("cancel : ", this);
+                    },
+                    /*format : function (value) {
+                        return value + '%';
+                    },*/
+                    draw : function () {
+
+                        // "tron" case
+                        if(this.$.data('skin') == 'tron') {
+
+                            this.cursorExt = 0.3;
+
+                            var a = this.arc(this.cv)  // Arc
+                                , pa                   // Previous arc
+                                , r = 1;
+
+                            this.g.lineWidth = this.lineWidth;
+
+                            if (this.o.displayPrevious) {
+                                pa = this.arc(this.v);
+                                this.g.beginPath();
+                                this.g.strokeStyle = this.pColor;
+                                this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, pa.s, pa.e, pa.d);
+                                this.g.stroke();
+                            }
+
+                            this.g.beginPath();
+                            this.g.strokeStyle = r ? this.o.fgColor : this.fgColor ;
+                            this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, a.s, a.e, a.d);
+                            this.g.stroke();
+
+                            this.g.lineWidth = 2;
+                            this.g.beginPath();
+                            this.g.strokeStyle = this.o.fgColor;
+                            this.g.arc( this.xy, this.xy, this.radius - this.lineWidth + 1 + this.lineWidth * 2 / 3, 0, 2 * Math.PI, false);
+                            this.g.stroke();
+
+                            return false;
+                        }
+                    }
+                });
+
+                // Example of infinite knob, iPod click wheel
+                var v, up=0,down=0,i=0
+                    ,$idir = $("div.idir")
+                    ,$ival = $("div.ival")
+                    ,incr = function() { i++; $idir.show().html("+").fadeOut(); $ival.html(i); }
+                    ,decr = function() { i--; $idir.show().html("-").fadeOut(); $ival.html(i); };
+                $("input.infinite").knob(
+                                    {
+                                    min : 0
+                                    , max : 20
+                                    , stopper : false
+                                    , change : function () {
+                                                    if(v > this.cv){
+                                                        if(up){
+                                                            decr();
+                                                            up=0;
+                                                        }else{up=1;down=0;}
+                                                    } else {
+                                                        if(v < this.cv){
+                                                            if(down){
+                                                                incr();
+                                                                down=0;
+                                                            }else{down=1;up=0;}
+                                                        }
+                                                    }
+                                                    v = this.cv;
+                                                }
+                                    });
+            });
+</script>
+
+<div id="ivknob" class="demo" style = "display:none;"> <h3>Adjust offset</h3>
+<input class="knob" data-width="100" data-max="1000" data-min="-1000" data-displayPrevious=true value="0">
+</div>
+
+          
+  
+   
