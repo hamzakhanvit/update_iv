@@ -267,14 +267,16 @@ function lock_status()
         var flag = 1;
         islandviewerAlignObj.setlock(true);
         islandviewerAlignObj.ivknob(true);
-        $('#ivknob').show();
+        $('#ivknob_fine').show();
+        $('#ivknob_major').show();
   }
   else{
   
   console.log("Lock checkbox is Off");
         var flag = 0;
         islandviewerAlignObj.setlock(false);
-        $('#ivknob').hide();
+        $('#ivknob_fine').hide();
+        $('#ivknob_major').hide();
   
   }
 }

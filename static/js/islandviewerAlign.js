@@ -99,20 +99,6 @@ for (ext_id in islandviewerAlignData){
          }
          
          }
-/*Once this is also called through lock_status()
-
-Retrieve the genome sizes of both the plots
-The offset range will be set equal to the difference in genome size of both the plots.
-Change the result.html file to include - 
-
-<div class="knob" >
-        <input class="knob" data-width="100" data-max="max difference between genome sizes" data-min="0" data-displayPrevious=true value="0">
-        </div>
- 
-Retrieve the current brush positions of the smaller plot.
-
-Change the position of the brush as the knob changes.
-*/
 
 }
 
