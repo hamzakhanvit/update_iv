@@ -269,6 +269,7 @@ function lock_status()
         islandviewerAlignObj.ivknob(true);
         $('#ivknob_fine').show();
         $('#ivknob_major').show();
+        $('#reset_button').show();
   }
   else{
   
@@ -277,7 +278,7 @@ function lock_status()
         islandviewerAlignObj.setlock(false);
         $('#ivknob_fine').hide();
         $('#ivknob_major').hide();
-  
+        $('#reset_button').hide();
   }
 }
 
